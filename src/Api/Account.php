@@ -2,6 +2,7 @@
 
 namespace TochkaBank\Api;
 
+use GuzzleHttp\Exception\GuzzleException;
 use TochkaBank\Client;
 use TochkaBank\Exceptions\InvalidJWTToken;
 use TochkaBank\Responses\BankAccount;
@@ -23,7 +24,7 @@ class Account
      * Возвращает список доступных организаций
      *
      * @return Organization[]
-     * @throws InvalidJWTToken
+     * @throws InvalidJWTToken|GuzzleException
      */
     public function getOrganizations()
     {
@@ -34,7 +35,7 @@ class Account
      * Возвращает список доступных счетов
      *
      * @return BankAccount[]
-     * @throws InvalidJWTToken
+     * @throws InvalidJWTToken|GuzzleException
      */
     public function getAccounts()
     {

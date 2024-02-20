@@ -2,6 +2,7 @@
 
 namespace TochkaBank\Api;
 
+use GuzzleHttp\Exception\GuzzleException;
 use TochkaBank\Client;
 use TochkaBank\Exceptions\InvalidJWTToken;
 use TochkaBank\Responses\Statement\Request;
@@ -19,13 +20,14 @@ class Statement
 
 
     /**
-     * Делает запрос на создание выписки
-     * Обратите внимание что Даты должны указываться как string в формате YYYY-MM-DD
+     * Делает запрос на создание выписки.
+     * Обратите внимание, что Даты должны указываться как string в формате YYYY-MM-DD
      * Карбон специально не использовался дабы не тащить доп зависимости в пакет
      *
      * @param \TochkaBank\Requests\Statement\Request $request
+     *
      * @return RequestId
-     * @throws InvalidJWTToken
+     * @throws InvalidJWTToken|GuzzleException
      */
     public function create(\TochkaBank\Requests\Statement\Request $request)
     {
@@ -35,9 +37,11 @@ class Statement
 
     /**
      * Получает информацию про выписку
+     *
      * @param $requestId
+     *
      * @return Request
-     * @throws InvalidJWTToken
+     * @throws InvalidJWTToken|GuzzleException
      */
     public function get($requestId)
     {
@@ -51,8 +55,9 @@ class Statement
      *
      * @param $requestId
      * @param $forceRequest
+     *
      * @return string
-     * @throws InvalidJWTToken
+     * @throws InvalidJWTToken|GuzzleException
      */
     public function getStatus($requestId, $forceRequest = false)
     {
@@ -63,6 +68,7 @@ class Statement
         $response = $this->client->request('GET', '/statement/status/' . $requestId);
         $status = (new Status($response))->getStatus();
         $cache[$requestId] = $status;
+
         return $status;
     }
 }

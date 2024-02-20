@@ -1,12 +1,12 @@
 # Tochka Bank
 Библиотека представляет собой оберку вокруг Tochka Bank API
 
-![compatible](https://img.shields.io/badge/PHP%207-Compatible-brightgreen.svg)
+![compatible](https://img.shields.io/badge/PHP%208-Compatible-brightgreen.svg)
 
 
 ## Установка ##
 ```sh
-composer require antonforwork/tochka-bank
+composer require two-faces/tochka-bank
 ```
 
 ## Использование ##

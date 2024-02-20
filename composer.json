@@ -1,5 +1,5 @@
 {
-  "name": "antonforwork/tochka-bank",
+  "name": "two-faces/tochka-bank",
   "description": "Tochka Bank API",
   "type": "library",
   "license": "MIT",
@@ -7,11 +7,15 @@
     {
       "name": "antonforwork",
       "email": "me@anton.in.ua"
+    },
+    {
+      "name": "Two-Faces",
+      "email": "anton98767@gmail.com"
     }
   ],
   "require": {
-    "guzzlehttp/guzzle": ">=6",
-    "lazyjsonmapper/lazyjsonmapper": ">=1"
+    "guzzlehttp/guzzle": "^7.8.1",
+    "lazyjsonmapper/lazyjsonmapper": "^v2.0.1"
   },
   "minimum-stability": "stable",
   "autoload": {

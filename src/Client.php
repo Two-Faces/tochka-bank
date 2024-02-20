@@ -3,6 +3,7 @@
 namespace TochkaBank;
 
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use TochkaBank\Api\Account;
 use TochkaBank\Api\Statement;
 use TochkaBank\Exceptions\InvalidArgumentException;
@@ -50,8 +51,9 @@ class Client
      * @param $method
      * @param $uri
      * @param array $json
+     *
      * @return array|mixed
-     * @throws InvalidJWTToken
+     * @throws InvalidJWTToken|GuzzleException
      */
     public function request($method, $uri, $json = [])
     {
@@ -64,8 +66,8 @@ class Client
         try {
             $response = $this->guzzle->request($method, '/' . $this->getPrefixApiPath() . $uri, $options);
             $jsonRaw = $response->getBody()->getContents();
-            $json = \json_decode($jsonRaw, true);
-            return $json;
+
+            return json_decode($jsonRaw, true);
         } catch (ClientException $exception) {
             if ($exception->getCode() == 403) {
                 throw new InvalidJWTToken();
@@ -93,7 +95,8 @@ class Client
                 'Accept' => 'application/json',
             ]
         ], $options);
-        $this->guzzle = new \GuzzleHttp\Client($resultOptions);
+
+        $this->guzzle = new HttpClient($resultOptions);
     }
 
     /**
@@ -116,6 +119,7 @@ class Client
         }
         $oldValue = $this->jwt;
         $this->jwt = $jwt;
+
         return $oldValue;
     }
 }
